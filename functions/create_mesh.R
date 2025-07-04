@@ -1,7 +1,7 @@
 
 create_mesh <- function(
     data
-    , poly
+    , poly = "poly.rds"
     , buffer = 2
     , poly_sample = 8000
     , resolution = c(56,51)
@@ -31,7 +31,7 @@ create_mesh <- function(
     st_coordinates() %>%
     as.data.frame()
   
-  polygon <- read_rds(paste0("data/polygons/", poly))
+  polygon <- read_rds(paste0("./data/utils/", poly))
   
   poly_coords <- polygon %>%
     st_buffer(buffer) %>%
