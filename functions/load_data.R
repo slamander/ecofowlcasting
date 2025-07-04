@@ -10,7 +10,8 @@ load_data <- function(
     lon, 
     county, 
     site, 
-    crs
+    crs = "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0", 
+    transform = 32617
     # ,
     # ,
     ){
@@ -18,6 +19,7 @@ load_data <- function(
   pacman::p_load(
     tidyverse
     , sf
+    , lubridate
     # ,
     # ,
     ); conflicted::conflict_prefer_all("dplyr", quiet = T)
@@ -43,7 +45,7 @@ load_data <- function(
     filter(!is.na(lon)) %>%
     mutate(season = if_else(month %in% active_months, 1, 2),
            season_name = if_else(season == 1, "active", "inactive")) %>%
-    group_by(county, ID, year, season, lat, lon) %>%
+    group_by(county, ID, year, month, season, lat, lon) %>%
     summarize(
       wnv = sum(wnv, na.rm = T),
       testing = sum(testing, na.rm = T)) %>%
@@ -53,9 +55,11 @@ load_data <- function(
              crs = crs) %>%
     bind_cols(
       st_coordinates(.)) %>%
+    st_transform(32617) %>%
+    mutate(date = make_date(year = year, month = month)) %>%
     rename(lat = "Y", lon = "X") %>%
-    filter(season_name == "active") %>%
-    select(year, season, county, ID, lat, lon, wnv, season, geometry)
+    filter(season == 1) %>%
+    select(county, ID, date, year, month, lat, lon, wnv, testing, geometry)
   
   return(data)
 
