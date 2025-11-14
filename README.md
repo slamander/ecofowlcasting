@@ -1,4 +1,7 @@
-# ecofowlcasting ![ecofowlcasting tool for predicting the transmission of vector borne diseases in a sentinel chicken system](https://www.alexbaecher.com/project/disease-ecology/featured_hu3854238940016619547.webp)
+# ecofowlcasting <img src="[image-url](https://www.alexbaecher.com/project/disease-ecology/featured_hu3854238940016619547.webp)" alt="ecofowlcasting tool for predicting the transmission of vector borne diseases in a sentinel chicken system" align="right" height="200"/>
+
+ 
+ ![ecofowlcasting tool for predicting the transmission of vector borne diseases in a sentinel chicken system](https://www.alexbaecher.com/project/disease-ecology/featured_hu3854238940016619547.webp)
 
 A repository for predicting the transmission of vector borne diseases in a sentinel chicken system
 
